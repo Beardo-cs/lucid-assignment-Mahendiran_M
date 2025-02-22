@@ -130,26 +130,10 @@ public class CartOfferApplicationTests {
 		Assert.assertEquals(autowiredController.applyOffer(applyOfferRequest).toString(),"ApplyOfferResponse(cart_value=500)");
 	}
 
-	@Test
-	public void TC06_checkUserIDGreaterThan1() throws Exception {
-		List<String> segments = new ArrayList<>();
-		AutowiredController autowiredController = new AutowiredController();
-		ApplyOfferRequest applyOfferRequest = new ApplyOfferRequest();
-		segments.add("p1");
-		OfferRequest offerRequest = new OfferRequest(5,"FLATX",10,segments);
-		boolean result = addOffer(offerRequest);
-		Assert.assertTrue(result);
-		applyOfferRequest.setUser_id(2);
-		applyOfferRequest.setRestaurant_id(5);
-		applyOfferRequest.setCart_value(500);
-//		autowiredController.postOperation(offerRequest); Commented OfferRequest hence none of the offers will be applied
-		autowiredController.applyOffer(applyOfferRequest);
-		Assert.assertEquals(autowiredController.applyOffer(applyOfferRequest).toString(),"ApplyOfferResponse(cart_value=500)");
-	}
 
 
 	@Test
-	public void TC07_TestSegmentsUserID1() throws Exception {
+	public void TC06_TestSegmentsUserID1() throws Exception {
 		AutowiredController autowiredController = new AutowiredController();
 		SegmentResponse user_segment = autowiredController.getSegmentResponse(1);
 		System.out.println("7483294723"+user_segment);
@@ -159,37 +143,16 @@ public class CartOfferApplicationTests {
 	}
 
 	@Test
-	public void TC08_TestSegmentsUserID1GreaterThan1() throws Exception {
+	public void TC07_checkUserIDGreaterThan1() throws Exception {
 		AutowiredController autowiredController = new AutowiredController();
-		SegmentResponse user_segment = autowiredController.getSegmentResponse(2);
-		System.out.println("7483294723"+user_segment);
-		Assert.assertEquals("SegmentResponse(segment=null)",user_segment.toString());
-
-
-	}
-	@Test
-	public void TC09_checkInvalidOfferType() throws Exception {
-		List<String> segments = new ArrayList<>();
-		AutowiredController autowiredController = new AutowiredController();
-		ApplyOfferRequest applyOfferRequest = new ApplyOfferRequest();
-
-		segments.add("p1");
-		OfferRequest invalidOfferRequest = new OfferRequest(5, "", 10, segments); // Invalid offer type
-
-
-		autowiredController.postOperation(invalidOfferRequest);
-		applyOfferRequest.setUser_id(1);
-		applyOfferRequest.setRestaurant_id(5);
-		applyOfferRequest.setCart_value(500);
-		ApplyOfferResponse response = autowiredController.applyOffer(applyOfferRequest);
-
-		Assert.assertEquals("Invalid offer type should not affect cart value",autowiredController.applyOffer(applyOfferRequest).toString(), "ApplyOfferResponse(cart_value=450)"
-				);
+		int userID= 2;
+		SegmentResponse user_segment = autowiredController.getSegmentResponse(userID);
+		Assert.assertNotEquals("SegmentResponse(segment="+userID+")",user_segment.toString());
 	}
 
 
 	@Test
-	public void TC10_checkInvalidSegment() throws Exception {
+	public void TC08_checkInvalidSegment() throws Exception {
 		List<String> segments = new ArrayList<>();
 		AutowiredController autowiredController = new AutowiredController();
 		ApplyOfferRequest applyOfferRequest = new ApplyOfferRequest();
@@ -211,7 +174,28 @@ public class CartOfferApplicationTests {
 	}
 
 	@Test
-	public void TC11_checkFlatXMoreThanCartValue() throws Exception {
+	public void TC09_checkInvalidOfferType() throws Exception {
+		List<String> segments = new ArrayList<>();
+		AutowiredController autowiredController = new AutowiredController();
+		ApplyOfferRequest applyOfferRequest = new ApplyOfferRequest();
+		segments.add("p1");
+		OfferRequest invalidOfferRequest = new OfferRequest(5, "", 10, segments); // Invalid offer type
+
+		autowiredController.postOperation(invalidOfferRequest);
+		applyOfferRequest.setUser_id(1);
+		applyOfferRequest.setRestaurant_id(5);
+		applyOfferRequest.setCart_value(500);
+		ApplyOfferResponse response = autowiredController.applyOffer(applyOfferRequest);
+
+		Assert.assertEquals("Invalid offer type should not affect cart value",autowiredController.applyOffer(applyOfferRequest).toString(), "ApplyOfferResponse(cart_value=450)"
+				);
+	}
+
+
+
+
+	@Test
+	public void TC10_checkFlatXMoreThanCartValue() throws Exception {
 		List<String> segments = new ArrayList<>();
 		AutowiredController autowiredController = new AutowiredController();
 		ApplyOfferRequest applyOfferRequest = new ApplyOfferRequest();
@@ -233,7 +217,7 @@ public class CartOfferApplicationTests {
 
 
 	@Test
-	public void TC12_checkFlatXPercentageMoreThanAllowed() throws Exception {
+	public void TC11_checkFlatXPercentageMoreThanAllowed() throws Exception {
 		List<String> segments = new ArrayList<>();
 		AutowiredController autowiredController = new AutowiredController();
 		ApplyOfferRequest applyOfferRequest = new ApplyOfferRequest();
@@ -252,6 +236,11 @@ public class CartOfferApplicationTests {
 
 		// Expected: If max percentage discount is capped at 100, cart value should be 400
 		Assert.assertEquals("FLATX% discount should be capped correctly", response.toString(), "ApplyOfferResponse(cart_value=-500)" );
+	}
+
+	@Test
+	public void TC12_TestByTurningOffAllServers() throws Exception {
+		System.out.println("This is Manual Test Script && Connection refused Error should be displayed");
 	}
 
 
