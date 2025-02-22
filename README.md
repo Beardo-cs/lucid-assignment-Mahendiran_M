@@ -1,11 +1,8 @@
 # Prerequisities
 JDK 11
-
 Docker
-
 Postman (Functional Validation)
-
-intelliJ
+intelliJ (Automation Scripting)
 
 # How bring the mockservice up
 cd mockserver  
