@@ -1,6 +1,8 @@
 # Prerequisities
 JDK 11
 Docker
+Postman (Functional Validation)
+intelliJ
 
 # How bring the mockservice up
 cd mockserver  
@@ -14,3 +16,15 @@ The server will start at port 9001
 
 # How to run the tests
 ./mvnw test  
+
+# Assignment documentation
+https://docs.google.com/document/d/1CbvJ-TWCC0DcDDEoqTzxQQti-NAuzGaD7mbVG1TrlkA/edit?tab=t.0#heading=h.gxdppzf8y50k
+
+# Functional test cases
+https://docs.google.com/spreadsheets/d/16iGFq2QKm1M-DEnXn7m9VlbOcFg9FPEeDwAyeIRNtLo/edit?gid=468590208#gid=468590208
+
+# E2E Automation test cases
+https://docs.google.com/spreadsheets/d/16iGFq2QKm1M-DEnXn7m9VlbOcFg9FPEeDwAyeIRNtLo/edit?gid=2108871606#gid=2108871606
+
+
+

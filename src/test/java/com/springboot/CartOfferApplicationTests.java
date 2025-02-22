@@ -249,6 +249,7 @@ public class CartOfferApplicationTests {
 
 		ApplyOfferResponse response = autowiredController.applyOffer(applyOfferRequest);
 
+
 		// Expected: If max percentage discount is capped at 100, cart value should be 400
 		Assert.assertEquals("FLATX% discount should be capped correctly", response.toString(), "ApplyOfferResponse(cart_value=-500)" );
 	}
