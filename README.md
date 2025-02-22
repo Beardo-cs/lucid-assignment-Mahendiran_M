@@ -1,7 +1,10 @@
 # Prerequisities
 JDK 11
+
 Docker
+
 Postman (Functional Validation)
+
 intelliJ
 
 # How bring the mockservice up
